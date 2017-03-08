@@ -25,7 +25,7 @@ public class Main {
         Yo = 0.8;        // Начальные условия
         Zo = 2;
         h = 0.1; // шаг
-        double to = r(Xo, k) + 1;
+        double to = r(Xo, k) + 3;
         arrayX.add((int) (100 * r(Xo, k)));
         arrayY.add((int) (100 * r(Yo, k)));
         //System.out.println("\tX\t\tY\t\tZ");
@@ -51,18 +51,29 @@ public class Main {
             Yo = Y1;
             Zo = Z1;
         }
+
+        int[] res1 = new int[arrayX.size()];
+        for (int i = 0; i < arrayX.size(); i++) {
+            res1[i] = (int) arrayX.get(i);
+        }
+        int[] res2 = new int[arrayY.size()];
+        for (int i = 0; i < arrayY.size(); i++) {
+            res2[i] = (int) arrayY.get(i);
+        }
+
         Draw draw = new Draw();
-        draw.giveArr(arrayX, arrayY);
-
+        draw.giveArr(res1, res2);
+        draw.addValues();
     }
-
 
     public static double r(double value, int k) {                 // функция для округления
         return (double) Math.round((Math.pow(10, k) * value)) / Math.pow(10, k);
     }
 
     public static double f(double x, double y, double z) {
+
         return (Math.cos(3 * x) - 4 * y);
+        //return 0;
     }
 }
 

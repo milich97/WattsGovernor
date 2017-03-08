@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 public class Draw extends JPanel {
     int startX = 600, startY = 200, sizeX = 600, sizeY = 400;
-    ArrayList<Integer> arrayX;
-    ArrayList<Integer> arrayY;
+    int[] arrayX;
+    int[] arrayY;
 
     public Draw() {
 
@@ -20,40 +20,40 @@ public class Draw extends JPanel {
         frame.getContentPane().add(this);
         //frame.pack();
         frame.setVisible(true);
-        Graphics gg;
-        gg = getGraphics();
-        gg.setColor(Color.cyan);
-        gg.drawLine(0, 0, 233, 234);
-        gg.fillRect(0, 0, 300, 500);
+
     }
 
 
-    public void giveArr(ArrayList a1, ArrayList a2) {
-        arrayX = new ArrayList<>();
-        arrayY = new ArrayList<>();
+    public void giveArr(int[] a1, int[] a2) {
+        arrayX = new int[a1.length];
+        arrayY = new int[a2.length];
         arrayX = a1;
         arrayY = a2;
     }
-
+    public void addValues() {
+        for (int i = 0; i < arrayX.length; i++) {
+            arrayX[i] = arrayX[i] + sizeX / 2;
+            arrayY[i] = sizeY / 2 - arrayY[i];
+        }
+    }
 
 
     @Override
     protected void paintComponent(Graphics g) {
         g.setColor(Color.black);
-
-//        for (int i = 0; i < ; i++) {
-//            g.drawLine();
-//        }
-
         g.drawLine(sizeX / 2, 0, sizeX / 2, sizeY);
         g.drawLine(0, sizeY / 2, sizeX, sizeY / 2);
-        int[] xArray = {20, 40, 60, 80, 100, 120, 130, 140, 280, sizeX / 2};
-        int[] yArray = {350, 345, 340, 310, 290, 280, 275, 273, 271, (int) 4.5};
 
-        int nPoint = xArray.length;
         g.setColor(Color.blue);
-        g.drawPolyline(xArray, yArray, nPoint);
+        g.drawPolyline(arrayX, arrayY, arrayX.length);
+        g.drawString("1", sizeX/2+100, sizeY/2);
+        g.drawString("2", sizeX/2+200, sizeY/2);
+        g.drawString("3", sizeX/2+300, sizeY/2);
+        g.drawString("1", sizeX/2, sizeY/2-100);
+        g.drawString("2", sizeX/2, sizeY/2-200);
     }
+
+
 }
 
 
