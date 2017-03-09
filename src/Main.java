@@ -2,12 +2,9 @@
  * Created by Миша on 27.02.2017.
  */
 
-import dessolver.math.RungeKutta;
-
 import javax.swing.*;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Vector;
 
 
 public class Main {
@@ -16,38 +13,44 @@ public class Main {
 
 
         int k = 2;                       //количество знаков после запятой
-        double Xo, Yo, Y1, Zo, Z1;
-        double k1, k2, k4, k3, h;
-        double q1, q2, q4, q3;
+        double To, Xo, X1, Yo, Y1, Zo, Z1;
+        double k1, k2, k3, k4, q1, q2, q3, q4, l1, l2, l3, l4, h;
         ArrayList<Integer> arrayX = new ArrayList<>();
         ArrayList<Integer> arrayY = new ArrayList<>();
-        Xo = 0;
-        Yo = 0.8;        // Начальные условия
+        To = 0;
+        Xo = 1;
+        Yo = -2;        // Начальные условия
         Zo = 2;
         h = 0.1; // шаг
-        double to = r(Xo, k) + 3;
-        arrayX.add((int) (100 * r(Xo, k)));
-        arrayY.add((int) (100 * r(Yo, k)));
-        //System.out.println("\tX\t\tY\t\tZ");
-        for (; r(Xo, k) < to; Xo += h) {
+        double to = r(To, k) + 2;
+        arrayX.add((int) (100 * r(To, k)));
+        arrayY.add((int) (100 * r(Xo, k)));
+        System.out.println("\tT\t\tX\t\tY\t\tZ");
+        for (; r(To, k) < to; To += h) {
 
-            k1 = h * f(Xo, Yo, Zo);
-            q1 = h * Zo;
+            k1 = Yo;
+            q1 = Zo;
+            l1 = f(Xo, Yo, Zo);
 
-            k2 = h * f(Xo + h / 2.0, Yo + q1 / 2.0, Zo + k1 / 2.0);
-            q2 = h * (Zo + k1 / 2.0);
+            k2 = Yo + h / 2 * k1;
+            q2 = Zo + h / 2 * q1;
+            l2 = f(Xo + h / 2 * k1, Yo + h / 2 * q1, Zo + h / 2 * l1);
 
-            k3 = h * f(Xo + h / 2.0, Yo + q2 / 2.0, Zo + k2 / 2.0);
-            q3 = h * (Zo + k2 / 2.0);
+            k3 = Yo + h / 2 * k2;
+            q3 = Zo + h / 2 * q2;
+            l3 = f(Xo + h / 2 * k2, Yo + h / 2 * q2, Zo + h / 2 * l2);
 
-            k4 = h * f(Xo + h, Yo + q3, Zo + k3);
-            q4 = h * (Zo + k3);
+            k4 = Yo + h * k3;
+            q4 = Zo + h * q3;
+            l4 = f(Xo + h * k3, Yo + h * q3, Zo + h * l3);
 
-            Z1 = Zo + (k1 + 2.0 * k2 + 2.0 * k3 + k4) / 6.0;
-            Y1 = Yo + (q1 + 2.0 * q2 + 2.0 * q3 + q4) / 6.0;
-            //System.out.println("\t" + r(Xo + h, k) + "\t\t" + r(Y1, k) + "\t\t" + r(Z1, k));
-            arrayX.add((int) (100 * r(Xo + h, k)));
-            arrayY.add((int) (100 * r(Y1, k)));
+            X1 = Xo + h * (k1 + 2 * k2 + 2 * k3 + k4) / 6.0;
+            Y1 = Yo + h * (q1 + 2 * q2 + 2 * q3 + q4) / 6.0;
+            Z1 = Zo + h * (l1 + 2 * l2 + 2 * l3 + l4) / 6.0;
+            System.out.println("\t" + r(To + h, k) + "\t\t" + r(X1, k) + "\t\t" + r(Y1, k) + "\t\t" + r(Z1, k));
+            arrayX.add((int) (100 * r(To + h, k)));
+            arrayY.add((int) (100 * r(X1, k)));
+            Xo = X1;
             Yo = Y1;
             Zo = Z1;
         }
@@ -71,8 +74,8 @@ public class Main {
     }
 
     public static double f(double x, double y, double z) {
-
-        return (Math.cos(3 * x) - 4 * y);
+        double a = 2000, m = 100, j = 2000, b = 3, w0 = 2, f0 = 1, F0 = -2, J = 0.001;
+        return (-a / m * z - (j - b * m * w0 * w0) / m * y + (f0 * F0) / (J * m) * x);
         //return 0;
     }
 }

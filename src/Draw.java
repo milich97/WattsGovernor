@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Миша on 07.03.2017.
  */
 public class Draw extends JPanel {
-    int startX = 600, startY = 200, sizeX = 600, sizeY = 400;
+    int startX = 600, startY = 200, sizeX = 900, sizeY = 600;
     int[] arrayX;
     int[] arrayY;
 
