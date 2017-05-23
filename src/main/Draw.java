@@ -12,7 +12,6 @@ import java.io.IOException;
  * Created by Миша on 07.03.2017.
  */
 public class Draw extends JPanel {
-    int startX = 600, startY = 200, sizeX = 900, sizeY = 600;
     double[] arrayX;
     double[] arrayY;
 
@@ -27,7 +26,7 @@ public class Draw extends JPanel {
         org.knowm.xchart.XYChart chart = QuickChart.getChart("Watt's Governor", "t", "ω(t)", "ω(t)", arrayX, arrayY);
         // Show it
         new SwingWrapper(chart).displayChart();
-        BitmapEncoder.saveBitmapWithDPI(chart, "2", BitmapEncoder.BitmapFormat.PNG, 300);
+       // BitmapEncoder.saveBitmapWithDPI(chart, "2", BitmapEncoder.BitmapFormat.PNG, 300);
 
     }
 
