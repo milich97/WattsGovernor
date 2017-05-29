@@ -33,10 +33,10 @@ public class Solver {
         ArrayList<Double> arrayY = new ArrayList<>();
 
         h = 0.01; // шаг
-        double to = r(To, k) + 100;
+        double to = r(To, k) + 250;
         arrayX.add(To);
         arrayY.add(Xo);
-        System.out.println("\tT\t\tX");
+        //System.out.println("\tT\t\tX");
         for (; r(To, k) < to; To += h) {
 
             k1 = Yo;
@@ -62,7 +62,7 @@ public class Solver {
             }
             Y1 = Yo + h * (q1 + 2 * q2 + 2 * q3 + q4) / 6.0;
             Z1 = Zo + h * (l1 + 2 * l2 + 2 * l3 + l4) / 6.0;
-            System.out.println("\t" + r(To + h, k) + "\t\t" + r(X1, k));
+           // System.out.println("\t" + r(To + h, k) + "\t\t" + r(X1, k));
             arrayX.add(r(To + h, k));
             arrayY.add(r(X1, k));
             Xo = X1;

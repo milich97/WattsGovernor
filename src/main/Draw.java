@@ -26,7 +26,7 @@ public class Draw extends JPanel {
         org.knowm.xchart.XYChart chart = QuickChart.getChart("Watt's Governor", "t", "ω(t)", "ω(t)", arrayX, arrayY);
         // Show it
         new SwingWrapper(chart).displayChart();
-       // BitmapEncoder.saveBitmapWithDPI(chart, "2", BitmapEncoder.BitmapFormat.PNG, 300);
+        //BitmapEncoder.saveBitmapWithDPI(chart, "5", BitmapEncoder.BitmapFormat.PNG, 300);
 
     }
 
